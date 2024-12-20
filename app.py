@@ -18,11 +18,15 @@ class Simple_Calculator:
     
     @staticmethod
     def division(value1,value2):
-        return value1/value2 if value2 !=0 else "Error: Division by Zero"
+        if value2 == 0:
+            return "Division by zero is undefined"
+        return value1/value2
     
     @staticmethod
     def percentage(value1,value2):
-        return value1%value2 if value2 != 0 else "Error: Division by Zero"
+        if value2 == 0:
+            return "Cannot calculate percentage with divisor zero"
+        return (value1/value2)*100
     
 @app.route('/',methods= ['GET', 'POST'])
 def calculator():
@@ -44,11 +48,11 @@ def calculator():
         elif operation == 'multiply':
             result = calculator.multiplication(value1,value2)
             
-        elif operation == 'divistion':
+        elif operation == 'divide':
             result = calculator.division(value1,value2)
             
         elif operation == 'percentage':
-            result == calculator.percentage(value1,value2)
+            result = calculator.percentage(value1,value2)
             
             
     return render_template('index.html',result =result)
