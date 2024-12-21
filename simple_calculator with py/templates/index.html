@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        input, select, button {
+            width: 100%;
+            margin: 8px 0;
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Simple Calculator</h1>
+        <form method="POST">
+            <input type="number" name="value1" placeholder="Enter first value" required>
+            <input type="number" name="value2" placeholder="Enter second value" required>
+            <select name="operation">
+                <option value="add">Addition</option>
+                <option value="subtract">Subtraction</option>
+                <option value="multiply">Multiplication</option>
+                <option value="divide">Division</option>
+                <option value="percentage">Percentage</option>
+            </select>
+            <button type="submit">Calculate</button>
+        </form>
+        {% if result is not none %}
+            <div class="result">Result: {{ result }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
