@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Data Scraper</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px 0;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        img {
+            max-width: 100px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Event Data Scraper</h1>
+        <button id="scrapeButton">Scrape Data</button>
+        <button id="downloadButton">Download Excel</button>
+        <table id="eventTable">
+            <thead>
+                <tr>
+                    <th>Event Name</th>
+                    <th>Image</th>
+                    <th>Link</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <script>
+        document.getElementById("scrapeButton").addEventListener("click", async () => {
+            const response = await fetch("/scrape");
+            const data = await response.json();
+
+            if (data.status === "success") {
+                const events = data.data;
+                const tableBody = document.querySelector("#eventTable tbody");
+                tableBody.innerHTML = ""; // Clear existing rows
+
+                events["Event Name"].forEach((name, index) => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${name}</td>
+                        <td><img src="${events['Event Image'][index]}" alt="${name}"></td>
+                        <td><a href="${events['Event Link'][index]}" target="_blank">Visit</a></td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+
+                alert("Data scraped and displayed successfully!");
+            } else {
+                alert("Error: " + data.message);
+            }
+        });
+
+        document.getElementById("downloadButton").addEventListener("click", () => {
+            window.location.href = "/download";
+        });
+    </script>
+</body>
+</html>

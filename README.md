@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🛍️ Flipkart Most Searched Product Tracker
 
 A lightweight Python-based web scraper that tracks prices, review titles, and ratings for the **most searched products** on Flipkart.
@@ -34,4 +35,7 @@ review_ratings = [
 -BeautifulSoup4
 -Requests
 -Flipkart public product pages
+=======
+Projects 
+>>>>>>> 5bcfedf7c51f77cc236be391b0f58c6b86a51639
 
