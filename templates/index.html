@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flipkart Price Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h1>Welcome to the Price Tracker</h1>
+
+    <form method="POST" action="/">
+        <label for="selected_csv">Select Data File:</label>
+        <select name="selected_csv" id="selected_csv" required>
+            <option value="">-- Please select a file --</option>
+            {% for filename in csv_files %}
+                <option value="{{ filename }}" {% if filename == selected_file_display_name %}selected{% endif %}>
+                    {{ filename }}
+                </option>
+            {% else %}
+                <option value="" disabled>No CSV files found</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Show Data</button>
+    </form>
+
+    <!-- Display flashed messages (like errors) -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class=flashes>
+        {% for category, message in messages %}
+          <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+
+    <!-- Display data table if data exists -->
+    {% if data and selected_file_display_name %}
+        <h2>Results for: {{ selected_file_display_name }}</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Link</th>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Rating</th>
+                    <th>Review Title</th>
+                    <th>Review Content</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                <tr>
+                    <td><a href="{{ row[0] }}" target="_blank" rel="noopener noreferrer">Link</a></td> <!-- Added rel attribute -->
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>{{ row[3] }}</td>
+                    <td>{{ row[4] }}</td>
+                    <td>{{ row[5] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% elif selected_file_display_name and not data and not get_flashed_messages(category_filter=['error']) %}
+         <!-- Show only if a file was selected, but no data resulted (and no specific error flashed) -->
+         <!-- This condition might overlap with flashed warnings, which is okay -->
+        <p>No displayable results found in "{{ selected_file_display_name }}" (empty, malformed, or all rows filtered).</p>
+    {% endif %}
+
+</body>
+</html>

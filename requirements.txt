@@ -1,0 +1,6 @@
+Flask>=2.0
+requests>=2.25
+beautifulsoup4>=4.9
+redis>=4.0
+rq>=1.10
+# Add gunicorn or waitress if deploying later
