@@ -35,6 +35,12 @@ review_ratings = [
 -BeautifulSoup4
 -Requests
 -Flipkart public product pages
+
+How it Works:
+[Download the Demo Video](assets/Recording_2025-04-26_011701.mp4)
+![Demo Preview](assets/demo.gif)
+
+
 =======
 Projects 
 >>>>>>> 5bcfedf7c51f77cc236be391b0f58c6b86a51639
