@@ -36,12 +36,6 @@ review_ratings = [
 -Requests
 -Flipkart public product pages
 
-How it Works:
-# Price Tracker App 📈
-
-## Demo Video 🎥
-
-[Watch the demo](./.mp4)
 
 > Click the link above to view the demonstration video showing how the Price Tracker App works!
 
