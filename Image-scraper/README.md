@@ -21,7 +21,7 @@ This project is a web-based image scraping tool built with **Flask**, **Beautifu
 
 ## 📦 Installation
 
-1. Clone the repo:
+1. Clone the repo:  git clone https://github.com/VishnukumarWDS/Projects/tree/main/Image-scraper
 2. Create a virtual environment (optional but recommended):
 
    ```bash
